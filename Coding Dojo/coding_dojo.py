@@ -6,7 +6,7 @@ import random
 
 
 heroi = {}
-vilao ={}
+vilao = {}
 
 heroi["nome"] = "Bob"
 vilao["nome"] = "Patrick"
@@ -31,26 +31,30 @@ pocao = 3
 
 def magia(vida_heroi,vida_vilao):
     magia=random.randint(1,10)
+    pct=int(round(0.01*vida_heroi))
+    pct_v=int(round(0.01*vida_vilao))
     if magia==1:
-        vida_heroi-=5
+        vida_heroi-=5*pct
     elif magia<=3:
         return vida_heroi,vida_vilao
     elif magia<=8:
-        vida_vilao-=5
+        vida_vilao-=5*pct_v
     else:
-        vida_vilao-=10
+        vida_vilao-=10*pct_v
     return vida_heroi,vida_vilao
 
 def magia_negra(vida_heroi,vida_vilao):
     magia=random.randint(1,10)
+    pct=int(round(0.01*vida_heroi))
+    pct_v=int(round(0.01*vida_vilao))
     if magia==1:
-        vida_vilao-=5
+        vida_vilao-=5*pct_v
     elif magia<=3:
         return vida_heroi,vida_vilao
     elif magia<=8:
-        vida_heroi-=5
+        vida_heroi-=5*pct
     else:
-        vida_heroi-=10
+        vida_heroi-=10*pct
     return vida_heroi,vida_vilao
 
 
@@ -124,13 +128,13 @@ while heroi["vida"]>0 and vilao["vida"]>0:
         elif vilao_acao == 'magia':
             inicial_h=heroi['vida']
             inicial_v=vilao['vida']
-            heroi['vida'],vilao['vida'] = magia_negra(heroi['vida'],vilao['vida'])
+            heroi['vida'], vilao['vida'] = magia_negra(heroi['vida'],vilao['vida'])
             dano_h=inicial_h-heroi['vida']
             dano_v=inicial_v-vilao['vida']
             if dano_h != 0:
-                print("O vilao te deu ",dano_h," de dano com magia.")
+                print("O vilao te deu ",dano_h," de dano com magia negra.")
             elif dano_v != 0:
-                print("O vilao se deu ",dano_v," de dano com magia.")
+                print("O vilao se deu ",dano_v," de dano com magia negra.")
         elif vilao_acao == 'upgrade':
             if vilao['arma'] < 20:
                 vilao["arma"] += 5
